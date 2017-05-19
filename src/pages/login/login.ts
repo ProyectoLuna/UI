@@ -68,7 +68,7 @@ export class LoginPage {
     });
     */
 
-    this.nativeStorage.setItem('logged_in', {value: true})
+    this.nativeStorage.setItem('logged', {value: true})
       .then(
         () => this.navCtrl.push(this.home_page),
         error => console.error('Error storing item', error)
@@ -76,7 +76,7 @@ export class LoginPage {
   }
 
   ionViewWillEnter() {
-    this.nativeStorage.getItem('logged_in')
+    this.nativeStorage.getItem('logged')
       .then(
         (data) => {
           if (data['value'] == true){
@@ -88,4 +88,18 @@ export class LoginPage {
         }
       );
   }
+
+ionViewCanLeave() {
+  this.nativeStorage.getItem('logged')
+    .then(
+      (data) => {
+        return data['value'];
+      },
+      (error) => {
+        console.error(error);
+        return false;
+      }
+    );
+  }
+
 }

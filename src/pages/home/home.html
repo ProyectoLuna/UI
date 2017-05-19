@@ -1,7 +1,5 @@
 <ion-header>
-  <ion-navbar>
     <ion-title>Panel de control</ion-title>
-  </ion-navbar>
 </ion-header>
 
 <ion-content padding>
@@ -12,7 +10,7 @@
           <button ion-button>Luces</button>
         </ion-col>
         <ion-col col-4>
-          <button ion-button>Emchufes</button>
+          <button ion-button>Enchufes</button>
         </ion-col>
       </ion-row>
       <ion-row>
@@ -20,7 +18,7 @@
           <button ion-button>Termostatos</button>
         </ion-col>
         <ion-col col-4>
-          <button ion-button (click)="do_config($event)">Configuracion</button>
+          <button ion-button [navPush]="config_page">Configuración</button>
         </ion-col>
       </ion-row>
     </ion-grid>
