@@ -1,9 +1,13 @@
 import { Component } from '@angular/core';
 
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { NativeStorage } from '@ionic-native/native-storage';
 
 import { Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
+
+import { LoginPage } from '../login/login'
+
 
 @IonicPage()
 
@@ -14,8 +18,36 @@ import 'rxjs/add/operator/map';
 
 export class HomePage {
 
-  constructor(public navCtrl: NavController) {
+  login_page:any = LoginPage;
+
+  constructor(public navCtrl: NavController,
+              private nativeStorage: NativeStorage)
+  {
 
   }
 
+    do_logout() {
+      this.nativeStorage.setItem('logged_in', {value: false})
+        .then(
+          () => this.navCtrl.push(this.login_page),
+          error => console.error('Error storing item', error)
+        );
+    }
+
+    ionViewCanEnter() {
+      this.nativeStorage.getItem('logged_in')
+        .then(
+          (data) => {
+            if (data['value'] == true) {
+              return true;
+            } else {
+              return false;
+            }
+          },
+          (error) => {
+            console.error(error);
+            return false;
+          }
+        );
+    }
 }

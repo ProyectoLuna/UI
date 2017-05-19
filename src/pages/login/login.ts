@@ -7,8 +7,10 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
 
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import { NativeStorage } from '@ionic-native/native-storage';
 
 import { HomePage } from '../home/home'
+
 
 @IonicPage()
 
@@ -26,7 +28,8 @@ export class LoginPage {
               public navParams: NavParams,
               private formBuilder: FormBuilder,
               public http: Http,
-              private barcodeScanner: BarcodeScanner)
+              private barcodeScanner: BarcodeScanner,
+              private nativeStorage: NativeStorage)
   {
     this.login_form = this.formBuilder.group({
       user: ['', Validators.required],
@@ -37,6 +40,7 @@ export class LoginPage {
   capture_bidi(event) {
     this.barcodeScanner.scan().then((barcodeData) => {
      // Success! Barcode data is here
+     console.log(barcodeData.text)
     }, (err) => {
         // An error occurred
     });
@@ -44,13 +48,14 @@ export class LoginPage {
 
   do_login() {
 
+    /*
     let link: string = "http://127.0.0.1:8100/do-login",
         data: any = JSON.stringify(this.login_form.value),
         type: string = "application/json; charset=UTF-8",
         headers: any = new Headers({ 'Content-Type': type}),
         options: any = new RequestOptions({ headers: headers })
 
-    /*
+
     this.http.post(link, data, options)
     .subscribe(data =>
     {
@@ -63,7 +68,24 @@ export class LoginPage {
     });
     */
 
-    this.navCtrl.push(this.home_page);
+    this.nativeStorage.setItem('logged_in', {value: true})
+      .then(
+        () => this.navCtrl.push(this.home_page),
+        error => console.error('Error storing item', error)
+      );
   }
 
+  ionViewWillEnter() {
+    this.nativeStorage.getItem('logged_in')
+      .then(
+        (data) => {
+          if (data['value'] == true){
+            this.navCtrl.push(this.home_page);
+          };
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
+  }
 }

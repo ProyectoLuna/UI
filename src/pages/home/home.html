@@ -1,28 +1,31 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>
-      Panel de control
-    </ion-title>
+    <ion-title>Panel de control</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <ion-grid>
-    <ion-row>
-      <ion-col col-4>
-        Luces
-      </ion-col>
-      <ion-col col-4>
-        Enchufes
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col col-4>
-        Temostatos
-      </ion-col>
-      <ion-col col-4>
-        Configuracióun
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  <ion-item>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-4>
+          Luces
+        </ion-col>
+        <ion-col col-4>
+          Enchufes
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-4>
+          Temostatos
+        </ion-col>
+        <ion-col col-4>
+          Configuracióun
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-item>
+  <ion-item>
+    <button ion-button (click)="do_logout($event)">Desconectarse</button>
+  </ion-item>
 </ion-content>
