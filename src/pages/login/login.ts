@@ -6,6 +6,8 @@ import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
 
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+
 import { HomePage } from '../home/home'
 
 @IonicPage()
@@ -23,11 +25,20 @@ export class LoginPage {
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private formBuilder: FormBuilder,
-              public http: Http)
+              public http: Http,
+              private barcodeScanner: BarcodeScanner)
   {
     this.login_form = this.formBuilder.group({
       user: ['', Validators.required],
       password: ['', Validators.required]
+    });
+  }
+
+  capture_bidi(event) {
+    this.barcodeScanner.scan().then((barcodeData) => {
+     // Success! Barcode data is here
+    }, (err) => {
+        // An error occurred
     });
   }
 
