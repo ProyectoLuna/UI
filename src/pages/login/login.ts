@@ -8,6 +8,7 @@ import 'rxjs/add/operator/map';
 
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { NativeStorage } from '@ionic-native/native-storage';
+import { Network } from '@ionic-native/network';
 
 import { HomePage } from '../home/home'
 
@@ -29,7 +30,8 @@ export class LoginPage {
               private formBuilder: FormBuilder,
               public http: Http,
               private barcodeScanner: BarcodeScanner,
-              private nativeStorage: NativeStorage)
+              private nativeStorage: NativeStorage,
+              private network: Network)
   {
     this.login_form = this.formBuilder.group({
       user: ['', Validators.required],
@@ -79,7 +81,7 @@ export class LoginPage {
     this.nativeStorage.getItem('logged')
       .then(
         (data) => {
-          if (data['value'] == true){
+          if (data['value'] === true){
             this.navCtrl.push(this.home_page);
           };
         },

@@ -44,11 +44,7 @@ export class HomePage {
       this.nativeStorage.getItem('logged')
         .then(
           (data) => {
-            if (data['value'] == true) {
-              return true;
-            } else {
-              return false;
-            }
+            return data['value'];
           },
           (error) => {
             console.error(error);
