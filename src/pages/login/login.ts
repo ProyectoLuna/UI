@@ -5,6 +5,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
+import { Subscription} from 'rxjs/Subscription';
 
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { NativeStorage } from '@ionic-native/native-storage';
@@ -25,6 +26,9 @@ export class LoginPage {
   private login_form : FormGroup;
   public home_page: any = HomePage;
 
+  connected: Subscription;
+  disconnected: Subscription;
+
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private formBuilder: FormBuilder,
@@ -36,15 +40,6 @@ export class LoginPage {
     this.login_form = this.formBuilder.group({
       user: ['', Validators.required],
       password: ['', Validators.required]
-    });
-  }
-
-  capture_bidi(event) {
-    this.barcodeScanner.scan().then((barcodeData) => {
-     // Success! Barcode data is here
-     console.log(barcodeData.text)
-    }, (err) => {
-        // An error occurred
     });
   }
 
@@ -75,6 +70,21 @@ export class LoginPage {
         () => this.navCtrl.push(this.home_page),
         error => console.error('Error storing item', error)
       );
+  }
+
+  ionViewDidEnter() {
+    this.connected = this.network.onConnect().subscribe(data => {
+      console.log(data);
+    }, error => console.error(error));
+
+    this.disconnected = this.network.onDisconnect().subscribe(data => {
+      console.log(data);
+    }, error => console.error(error));
+  }
+
+  ionViewWillLeave(){
+    this.connected.unsubscribe();
+    this.disconnected.unsubscribe();
   }
 
   ionViewWillEnter() {

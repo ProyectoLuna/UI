@@ -6,6 +6,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { NativeStorage } from '@ionic-native/native-storage';
+import { Network } from '@ionic-native/network';
 
 import { MyApp } from './app.component';
 import { LoginPage } from '../pages/login/login';
@@ -36,6 +37,7 @@ import { ConfigPage } from '../pages/config/config';
     SplashScreen,
     BarcodeScanner,
     NativeStorage,
+    Network,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
