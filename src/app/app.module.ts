@@ -8,14 +8,16 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { NativeStorage } from '@ionic-native/native-storage';
 
 import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
+import { HomePage } from '../pages/home/home';
+import { ConfigPage } from '../pages/config/config';
 
 @NgModule({
   declarations: [
     MyApp,
     LoginPage,
-    HomePage
+    HomePage,
+    ConfigPage
   ],
   imports: [
     BrowserModule,
@@ -26,7 +28,8 @@ import { LoginPage } from '../pages/login/login';
   entryComponents: [
     MyApp,
     LoginPage,
-    HomePage
+    HomePage,
+    ConfigPage
   ],
   providers: [
     StatusBar,
