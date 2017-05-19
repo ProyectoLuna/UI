@@ -1,18 +1,21 @@
-<!--
-  Generated template for the ConfigPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar>
-    <ion-title>config</ion-title>
+    <ion-title>Configuración</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
+    <ion-item>
+      <ion-grid>
+        <ion-row>
+          <button ion-button (click)="add_device($event)">Registrar dispositivo</button>
+        </ion-row>
+          <ion-row>
+            <button ion-button (click)="remove_device($event)">Eliminar dispositivo</button>
+          </ion-row>
+      </ion-grid>
+    </ion-item>
 </ion-content>
