@@ -26,8 +26,7 @@ export class LoginPage {
   private login_form : FormGroup;
   public home_page: any = HomePage;
 
-  connected: Subscription;
-  disconnected: Subscription;
+  public connection_status: any = "waiting...";
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -72,22 +71,8 @@ export class LoginPage {
       );
   }
 
-  ionViewDidEnter() {
-    this.connected = this.network.onConnect().subscribe(data => {
-      console.log(data);
-    }, error => console.error(error));
-
-    this.disconnected = this.network.onDisconnect().subscribe(data => {
-      console.log(data);
-    }, error => console.error(error));
-  }
-
-  ionViewWillLeave(){
-    this.connected.unsubscribe();
-    this.disconnected.unsubscribe();
-  }
-
   ionViewWillEnter() {
+    this.connection_status = this.network.type
     this.nativeStorage.getItem('logged')
       .then(
         (data) => {
