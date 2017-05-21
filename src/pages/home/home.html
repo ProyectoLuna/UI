@@ -5,27 +5,36 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-item>
-    <ion-grid>
-      <ion-row>
-        <ion-col col-4>
-          <button ion-button>Luces</button>
-        </ion-col>
-        <ion-col col-4>
-          <button ion-button>Enchufes</button>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col col-4>
-          <button ion-button>Termostatos</button>
-        </ion-col>
-        <ion-col col-4>
-          <button ion-button [navPush]="config_page">Configuración</button>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </ion-item>
+
+  <ion-card>
+    <ion-card-header>
+      Iluminación
+    </ion-card-header>
+    <ion-card-content>
+      <button ion-button>Ir</button>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      Termostatos
+    </ion-card-header>
+    <ion-card-content>
+      <button ion-button>Ir</button>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      Configuración
+    </ion-card-header>
+    <ion-card-content>
+      <button ion-button [navPush]="config_page">Configuración</button>
+    </ion-card-content>
+  </ion-card>
+
   <ion-item>
     <button ion-button (click)="do_logout($event)">Desconectarse</button>
   </ion-item>
+
 </ion-content>

@@ -5,7 +5,6 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
-import { Subscription} from 'rxjs/Subscription';
 
 import { NetworkInfo} from '../../providers/network/info'
 
@@ -50,7 +49,9 @@ export class LoginPage {
         self.link_type = result;
       });
     },1000);
+
   }
+
 
 
   do_login() {

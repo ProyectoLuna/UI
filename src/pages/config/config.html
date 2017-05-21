@@ -8,14 +8,25 @@
 
 
 <ion-content padding>
-    <ion-item>
-      <ion-grid>
+
+  <ion-card *ngFor="let gateway of gateways">
+    <h1>{{gateway.name}}</h1>
+
+    <ion-card *ngFor="let subscriptor of subscriptors">
+      <h2>{{subscriptor.name}}</h2>
+      <p>{{subscriptor.type}}</p>
+    </ion-card>
+
+  </ion-card>
+
+  <ion-item>
+    <ion-grid>
+      <ion-row>
+        <button ion-button (click)="add_device($event)">Registrar dispositivo</button>
+      </ion-row>
         <ion-row>
-          <button ion-button (click)="add_device($event)">Registrar dispositivo</button>
+          <button ion-button (click)="remove_device($event)">Eliminar dispositivo</button>
         </ion-row>
-          <ion-row>
-            <button ion-button (click)="remove_device($event)">Eliminar dispositivo</button>
-          </ion-row>
-      </ion-grid>
-    </ion-item>
+    </ion-grid>
+  </ion-item>
 </ion-content>
