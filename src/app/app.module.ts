@@ -8,6 +8,8 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { Network } from '@ionic-native/network';
 
+import { NetworkInfo} from '../providers/network/info'
+
 import { MyApp } from './app.component';
 import { LoginPage } from '../pages/login/login';
 import { HomePage } from '../pages/home/home';
@@ -38,6 +40,7 @@ import { ConfigPage } from '../pages/config/config';
     BarcodeScanner,
     NativeStorage,
     Network,
+    NetworkInfo,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

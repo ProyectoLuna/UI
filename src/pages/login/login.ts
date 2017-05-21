@@ -7,9 +7,10 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Subscription} from 'rxjs/Subscription';
 
+import { NetworkInfo} from '../../providers/network/info'
+
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { NativeStorage } from '@ionic-native/native-storage';
-import { Network } from '@ionic-native/network';
 
 import { HomePage } from '../home/home'
 
@@ -26,7 +27,8 @@ export class LoginPage {
   private login_form : FormGroup;
   public home_page: any = HomePage;
 
-  public connection_status: any = "waiting...";
+  link_type: any = "Conectando...";
+  link_timer: any;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -34,18 +36,27 @@ export class LoginPage {
               public http: Http,
               private barcodeScanner: BarcodeScanner,
               private nativeStorage: NativeStorage,
-              private network: Network)
+              public network_info: NetworkInfo)
   {
     this.login_form = this.formBuilder.group({
       user: ['', Validators.required],
       password: ['', Validators.required]
     });
+
+    var self = this;
+
+    this.link_timer = setInterval(function() {
+      self.network_info.get_type().then(result => {
+        self.link_type = result;
+      });
+    },1000);
   }
+
 
   do_login() {
 
     /*
-    let link: string = "http://127.0.0.1:8100/do-login",
+    let link: string = "http://127.0.0.1:8100/do_login",
         data: any = JSON.stringify(this.login_form.value),
         type: string = "application/json; charset=UTF-8",
         headers: any = new Headers({ 'Content-Type': type}),
@@ -72,7 +83,6 @@ export class LoginPage {
   }
 
   ionViewWillEnter() {
-    this.connection_status = this.network.type
     this.nativeStorage.getItem('logged')
       .then(
         (data) => {
@@ -86,17 +96,21 @@ export class LoginPage {
       );
   }
 
-ionViewCanLeave() {
-  this.nativeStorage.getItem('logged')
-    .then(
-      (data) => {
-        return data['value'];
-      },
-      (error) => {
-        console.error(error);
-        return false;
-      }
-    );
+  ionViewDidLeave(){
+    clearInterval(this.link_timer);
+  }
+
+  ionViewCanLeave() {
+    this.nativeStorage.getItem('logged')
+      .then(
+        (data) => {
+          return data['value'];
+        },
+        (error) => {
+          console.error(error);
+          return false;
+        }
+      );
   }
 
 }
