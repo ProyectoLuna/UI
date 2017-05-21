@@ -6,23 +6,18 @@
 
 <ion-content padding>
 
-  <ion-card>
-    <ion-card-header>
-      Iluminación
-    </ion-card-header>
-    <ion-card-content>
-      <button ion-button>Ir</button>
-    </ion-card-content>
+  <ion-card *ngFor="let gateway of gateways">
+    <h1>{{gateway.name}}</h1>
+
+    <ion-card *ngFor="let subscriptor of subscriptors">
+      <h2>{{subscriptor.name}}</h2>
+      <p>{{subscriptor.type}}</p>
+
+      <ion-toggle *ngIf="subscriptor.type === 'relay'" [(ngModel)]="pepperoni"></ion-toggle>
+    </ion-card>
+
   </ion-card>
 
-  <ion-card>
-    <ion-card-header>
-      Termostatos
-    </ion-card-header>
-    <ion-card-content>
-      <button ion-button>Ir</button>
-    </ion-card-content>
-  </ion-card>
 
   <ion-card>
     <ion-card-header>
