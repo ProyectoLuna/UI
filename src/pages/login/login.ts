@@ -52,35 +52,26 @@ export class LoginPage {
 
   }
 
-
-
   do_login() {
 
-    /*
-    let link: string = "http://127.0.0.1:8100/do_login",
+    let link: string = "https://jauriarts.org:8080/auth",
         data: any = JSON.stringify(this.login_form.value),
         type: string = "application/json; charset=UTF-8",
         headers: any = new Headers({ 'Content-Type': type}),
         options: any = new RequestOptions({ headers: headers })
 
-
     this.http.post(link, data, options)
+    .map(res => res.json())
     .subscribe(data =>
     {
-      if(data.status === 200) {
-        console.log("200");
-      }
-      else {
-        console.log("NO OK");
+      if (data.auth === true) {
+        this.nativeStorage.setItem('logged', {value: true})
+          .then(
+            () => this.navCtrl.push(this.home_page),
+            error => console.error('Error storing item', error)
+          );
       }
     });
-    */
-
-    this.nativeStorage.setItem('logged', {value: true})
-      .then(
-        () => this.navCtrl.push(this.home_page),
-        error => console.error('Error storing item', error)
-      );
   }
 
   ionViewWillEnter() {

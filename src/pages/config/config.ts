@@ -32,7 +32,7 @@ export class ConfigPage {
 
     var items = [];
 
-    var link = "https://192.168.10.13:8080/check_subscriptors";
+    var link = "https://jauriarts.org:8080/check_subscriptors";
 
     let type: string = "application/json; charset=UTF-8",
         headers: any = new Headers({ 'Content-Type': type}),
@@ -56,7 +56,7 @@ export class ConfigPage {
 
     var items = [];
 
-    var link = "https://192.168.10.13:8080/check_gateway";
+    var link = "https://jauriarts.org:8080/check_gateway";
 
     let type: string = "application/json; charset=UTF-8",
         headers: any = new Headers({ 'Content-Type': type}),
