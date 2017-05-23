@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController } from 'ionic-angular';
 
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Http, Headers, RequestOptions } from '@angular/http';
@@ -31,11 +31,12 @@ export class LoginPage {
   private login_form : FormGroup;
   public home_page: any = HomePage;
 
-  link_type: any = "Conectando...";
+  login_error: boolean = false;
+  link_type: string = "Conectando...";
   link_timer: any;
 
+
   constructor(public navCtrl: NavController,
-              public navParams: NavParams,
               private formBuilder: FormBuilder,
               public http: Http,
               private barcodeScanner: BarcodeScanner,
@@ -84,9 +85,17 @@ export class LoginPage {
                 error => console.error('Error storing item', error)
               );
           }
+          else {
+            if ( this.login_error === false) {
+              this.login_error = true;
+
+              setTimeout(() => {
+                this.login_error = false;
+              }, 10000);
+            }
+          }
         },
         (error) => {
-          console.log("TROLL");
           console.log(error);
         }
       );
