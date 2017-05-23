@@ -19,6 +19,8 @@ export class ConfigPage {
   gateways: any;
   subscriptors: any;
 
+  data_wait: boolean = true;
+
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private nativeStorage: NativeStorage,
@@ -26,6 +28,7 @@ export class ConfigPage {
   {
     this.check_gateway();
     this.check_subscriptors();
+    this.data_wait = false;
   }
 
   check_subscriptors() {

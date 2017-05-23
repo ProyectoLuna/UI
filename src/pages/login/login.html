@@ -22,7 +22,11 @@
        <button ion-button type="submit" [disabled]="!login_form.valid">Ingresar</button>
      </ion-item>
 
- </form>
+   </form>
+
+   <ion-item>
+     <button ion-button (click)="ionic.Platform.exitApp()">Cerrar</button>
+   </ion-item>
 
  <div *ngIf="login_error" class="center">
    <p>Usuario y/o contraseña incorrectos</p>

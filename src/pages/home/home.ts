@@ -22,16 +22,19 @@ export class HomePage {
   login_page:any = LoginPage;
   config_page:any = ConfigPage;
 
-    gateways: any;
-    subscriptors: any;
+  gateways: any;
+  subscriptors: any;
 
+  data_wait: boolean = true;
 
   constructor(public navCtrl: NavController,
               private nativeStorage: NativeStorage,
               public http: Http)
   {
+
     this.check_gateway();
     this.check_subscriptors();
+    this.data_wait = false;
   }
 
   check_subscriptors() {

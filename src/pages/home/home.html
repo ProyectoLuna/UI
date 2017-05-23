@@ -6,6 +6,11 @@
 
 <ion-content padding>
 
+  <div *ngIf="data_wait" class="center">
+   <ion-spinner></ion-spinner>
+   <p>Cargando datos</p>
+  </div>
+
   <ion-card *ngFor="let gateway of gateways" padding>
     <h1>{{gateway.name}}</h1>
 
@@ -30,6 +35,10 @@
 
   <ion-item>
     <button ion-button (click)="do_logout($event)">Desconectarse</button>
+  </ion-item>
+
+  <ion-item>
+   <button ion-button (click)="ionic.Platform.exitApp()">Cerrar</button>
   </ion-item>
 
 </ion-content>
