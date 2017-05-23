@@ -28,11 +28,11 @@
      <button ion-button (click)="ionic.Platform.exitApp()">Cerrar</button>
    </ion-item>
 
- <div *ngIf="login_error" class="center">
+ <div *ngIf="login_error">
    <p>Usuario y/o contraseña incorrectos</p>
  </div>
 
-<div *ngIf="login_wait" class="center">
+<div *ngIf="login_wait">
   <ion-spinner></ion-spinner>
   <p>Accediendo porfavor espere</p>
 </div>

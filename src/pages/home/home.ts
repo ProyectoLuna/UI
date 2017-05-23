@@ -25,8 +25,6 @@ export class HomePage {
   gateways: any;
   subscriptors: any;
 
-  data_wait: boolean = true;
-
   constructor(public navCtrl: NavController,
               private nativeStorage: NativeStorage,
               public http: Http)
@@ -34,7 +32,6 @@ export class HomePage {
 
     this.check_gateway();
     this.check_subscriptors();
-    this.data_wait = false;
   }
 
   check_subscriptors() {

@@ -6,7 +6,7 @@
 
 <ion-content padding>
 
-  <div *ngIf="data_wait" class="center">
+  <div *ngIf="!gateways">
    <ion-spinner></ion-spinner>
    <p>Cargando datos</p>
   </div>
@@ -19,6 +19,7 @@
       <p>{{subscriptor.type}}</p>
 
       <ion-toggle *ngIf="subscriptor.type === 'relay'"></ion-toggle>
+      <ion-range *ngIf="subscriptor.type === 'termostat'" min="0" max="40" step="1" snaps="true" color="secondary"></ion-range>
     </ion-card>
 
   </ion-card>
