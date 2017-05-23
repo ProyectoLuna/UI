@@ -9,10 +9,10 @@
 
 <ion-content padding>
 
-  <ion-card *ngFor="let gateway of gateways">
+  <ion-card *ngFor="let gateway of gateways" padding>
     <h1>{{gateway.name}}</h1>
 
-    <ion-card *ngFor="let subscriptor of subscriptors">
+    <ion-card *ngFor="let subscriptor of subscriptors" padding>
       <h2>{{subscriptor.name}}</h2>
       <p>{{subscriptor.type}}</p>
     </ion-card>

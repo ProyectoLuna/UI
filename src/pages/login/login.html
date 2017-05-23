@@ -24,9 +24,14 @@
 
  </form>
 
- <div *ngIf="login_error">
+ <div *ngIf="login_error" class="center">
    <p>Usuario y/o contraseña incorrectos</p>
  </div>
+
+<div *ngIf="login_wait" class="center">
+  <ion-spinner></ion-spinner>
+  <p>Accediendo porfavor espere</p>
+</div>
 
  <!--
  <ion-item>

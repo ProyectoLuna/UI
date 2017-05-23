@@ -32,6 +32,7 @@ export class LoginPage {
   public home_page: any = HomePage;
 
   login_error: boolean = false;
+  login_wait: boolean = false;
   link_type: string = "Conectando...";
   link_timer: any;
 
@@ -78,20 +79,28 @@ export class LoginPage {
       .map(res => res.json())
       .subscribe(
         (data) => {
-          if (data.auth === true) {
-            this.nativeStorage.setItem('logged', {value: true})
-              .then(
-                () => this.navCtrl.push(this.home_page),
-                error => console.error('Error storing item', error)
-              );
-          }
-          else {
-            if ( this.login_error === false) {
-              this.login_error = true;
 
-              setTimeout(() => {
-                this.login_error = false;
-              }, 10000);
+          if (this.login_wait === false) {
+
+            if (data.auth === true) {
+              this.login_wait = true;
+              this.nativeStorage.setItem('logged', {value: true})
+                .then(
+                  () => {
+                    this.login_wait = false;
+                    this.navCtrl.push(this.home_page)
+                  },
+                  error => console.error('Error storing item', error)
+                );
+            }
+            else {
+              if ( this.login_error === false) {
+                this.login_error = true;
+
+                setTimeout(() => {
+                  this.login_error = false;
+                }, 10000);
+              }
             }
           }
         },
