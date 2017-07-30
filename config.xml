@@ -2,10 +2,11 @@
 <widget id="io.ionic.starter" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Proyecto Luna</name>
     <description>User Interface</description>
-    <author email="hi@ionicframework" href="https://github.com/ProyectoLuna/">Proyecto Luna repository</author>
+    <author email="j.l.toledano.l@gmail.com" href="https://github.com/ProyectoLuna/">Proyecto Luna repository</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-navigation href="http://ionic.local/*" />
+    <allow-navigation href="http://192.168.10.13:8100" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />

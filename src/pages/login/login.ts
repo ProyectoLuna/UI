@@ -33,8 +33,11 @@ export class LoginPage {
 
   login_error: boolean = false;
   login_wait: boolean = false;
+
   link_type: string = "Conectando...";
   link_timer: any;
+
+  server_status: string = "Comprobando..."
 
 
   constructor(public navCtrl: NavController,
@@ -55,13 +58,37 @@ export class LoginPage {
       self.network_info.get_type().then(result => {
         self.link_type = result;
       });
+      self.check_server()
     },1000);
 
   }
 
+  check_server() {
+
+    var link = "https://192.168.10.13:8080/check_gateway";
+
+    let type: string = "application/json; charset=UTF-8",
+        headers: any = new Headers({ 'Content-Type': type}),
+        options: any = new RequestOptions({ headers: headers })
+
+    this.http.get(link, options)
+      .subscribe(
+        data => {
+          if (data.status === 200){
+            console.log(data.status)
+            this.server_status = "Online"
+          }
+        },
+        error => {
+          console.log("Realm Down")
+          this.server_status = "Desconectado"
+        }
+      );
+  }
+
   do_login() {
 
-    var link = "https://jauriarts.org:8080/auth";
+    var link = "https://192.168.10.13:8080/auth";
 
     var user = this.login_form.value.user;
     var pass = this.login_form.value.password;

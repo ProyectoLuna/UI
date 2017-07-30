@@ -7,30 +7,61 @@
 <ion-content padding>
 
   <div *ngIf="!gateways">
-   <ion-spinner></ion-spinner>
-   <p>Cargando datos</p>
+    <ion-spinner></ion-spinner>
+    <p>Recibiendo datos...</p>
   </div>
 
   <ion-card *ngFor="let gateway of gateways" padding>
-    <h1>{{gateway.name}}</h1>
 
-    <ion-card *ngFor="let subscriptor of subscriptors" padding>
-      <h2>{{subscriptor.name}}</h2>
-      <p>{{subscriptor.type}}</p>
+    <ion-card-header>
+      <div>
+        <ion-icon name="home"></ion-icon>
+        <h1>{{gateway.name}}</h1>
+      </div>
+    </ion-card-header>
 
-      <ion-toggle *ngIf="subscriptor.type === 'relay'"></ion-toggle>
-      <ion-range *ngIf="subscriptor.type === 'termostat'" min="0" max="40" step="1" snaps="true" color="secondary"></ion-range>
-    </ion-card>
+    <ion-card-content>
+    <div ng-repeat="zone in zones | groupBy:'name' | toArray:true">
+      <p>zones</p>
+      {{zone.name}}
 
+      <ion-card ng-repeat="subscriptor in zone" padding>
+          <ion-card-header>
+            <p>subs</p>
+            {{subscriptor.name}}
+          </ion-card-header>
+          <ion-card-content>
+
+            <!--
+            <div *ngIf="zone.subscriptor_type === 'relay'">
+              <ion-toggle></ion-toggle>
+            </div>
+
+            <div *ngIf="zone.subscriptor_type === 'termostat'">
+              <h1>19º</h1>
+              <button ion-button full>
+                <ion-icon name="add"></ion-icon>
+              </button>
+              <button ion-button full>
+                <ion-icon name="remove"></ion-icon>
+              </button>
+            </div>
+            -->
+          </ion-card-content>
+
+      </ion-card>
+    </div>
+    </ion-card-content>
   </ion-card>
-
 
   <ion-card>
     <ion-card-header>
       Configuración
     </ion-card-header>
     <ion-card-content>
-      <button ion-button [navPush]="config_page">Configuración</button>
+      <button ion-button [navPush]="config_page" full>
+        <ion-icon name="construct"></ion-icon>
+      </button>
     </ion-card-content>
   </ion-card>
 
@@ -41,5 +72,4 @@
   <ion-item>
    <button ion-button (click)="ionic.Platform.exitApp()">Cerrar</button>
   </ion-item>
-
 </ion-content>
